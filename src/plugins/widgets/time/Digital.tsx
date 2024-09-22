@@ -12,7 +12,7 @@ type Props = {
 };
 
 const Digital: FC<Props> = (props) => (
-  <div className="Time Digital" style={{display : 'flex',gap:'10px'}}>
+  <div className="Time Digital" style={{display : 'flex',alignItems: 'center',justifyContent:'center',gap:'10px'}}>
     <h1 >
       <IntlTime {...props} />
     </h1>
