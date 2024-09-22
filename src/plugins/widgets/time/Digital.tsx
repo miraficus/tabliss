@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
 import IntlTime from "./IntlTime";
+import IntlTimeSeconds from "./IntlTimeSeconds";
 
 type Props = {
   hour12: boolean;
@@ -11,10 +12,11 @@ type Props = {
 };
 
 const Digital: FC<Props> = (props) => (
-  <div className="Time Digital">
-    <h1>
+  <div className="Time Digital" style={{display : 'flex',gap:'10px'}}>
+    <h1 >
       <IntlTime {...props} />
     </h1>
+    {props.showSeconds &&  <h1 className="Seconds" ><IntlTimeSeconds {...props} /></h1>}
   </div>
 );
 

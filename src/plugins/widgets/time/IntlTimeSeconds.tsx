@@ -20,7 +20,7 @@ type Props = {
  * Code based on: https://github.com/mattermost/mattermost-webapp/pull/5138
  * Tabliss issue: https://github.com/joelshepherd/tabliss/issues/231
  */
-const IntlTime: React.FC<Props> = ({
+const IntlTimeSeconds: React.FC<Props> = ({
   hour12,
   showMinutes,
   showSeconds,
@@ -33,11 +33,11 @@ const IntlTime: React.FC<Props> = ({
   const formater = React.useMemo(
     () =>
       Intl.DateTimeFormat(locale, {
-        hour: "numeric",
-        hourCycle: hour12 ? "h12" : "h23",
-        minute: showMinutes ? "numeric" : undefined,
-        // second: showSeconds ? "numeric" : undefined, 
-        second:undefined,
+        // hour: "numeric",
+        // hourCycle: hour12 ? "h12" : "h23",
+        // minute: showMinutes ? "numeric" : undefined,
+        second: showSeconds ? '2-digit' : undefined, 
+        // second:undefined,
       }),
     [locale, hour12, showMinutes, showSeconds],
   );
@@ -60,4 +60,4 @@ const IntlTime: React.FC<Props> = ({
   }
 };
 
-export default IntlTime;
+export default IntlTimeSeconds;
