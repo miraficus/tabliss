@@ -16,11 +16,16 @@
     "translations": "node ./scripts/translations.js"
   },
   "dependencies": {
+    "@iconify-icon/react": "^2.3.0",
+    "@iconify/json": "^2.2.305",
+    "@iconify/react": "^5.2.0",
+    "@shadcn/ui": "^0.0.4",
     "core-js": "^3.40.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "feather-icons": "^4.29.2",
     "github-calendar": "^2.3.4",
+    "iconify-icon": "^2.3.0",
     "in-browser-language": "^1.0.3",
     "nanoid": "<4.0.0",
     "normalize.css": "^8.0.1",
@@ -28,12 +33,15 @@
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
     "react-intl": "^7.1.6",
+    "react-modal": "^3.16.3",
     "sass": "^1.84.0",
+    "shadcn-ui": "^0.9.4",
     "tlds": "^1.255.0",
     "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@types/webextension-polyfill": "^0.12.1",

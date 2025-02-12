@@ -64,7 +64,7 @@ const LinksSettings: FC<Props> = ({ data = defaultData, setData }) => {
           onChange={(values) =>
             dispatch(updateLink(index, { ...link, ...values }))
           }
-          setIconSize={(iconSize) => 
+          setIconSize={(iconSize: number) => 
             dispatch(updateIconSize(index, iconSize))
           }
           onMoveUp={

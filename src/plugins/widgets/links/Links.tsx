@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 
 import { useKeyPress, useToggle } from "../../../hooks";
-import { Icon } from "../../../views/shared";
+// import { Icon } from "../../../views/shared";
+import { Icon } from '@iconify-icon/react';
 import Display from "./Display";
 import { Props, defaultData } from "./types";
 import "./Links.sass";
@@ -42,7 +43,7 @@ const Links: FC<Props> = ({ data = defaultData }) => {
         ))
       ) : (
         <a onClick={toggleVisible} title="Show quick links">
-          <Icon name="link-2" />
+          <Icon icon="fe:insert-link" />
         </a>
       )}
     </div>

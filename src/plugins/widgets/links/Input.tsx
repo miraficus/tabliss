@@ -1,109 +1,111 @@
-import icons from "feather-icons/dist/icons.json";
-import React, { FC } from "react";
-
-import {
-  IconButton,
-  RemoveIcon,
-  DownIcon,
-  UpIcon,
-} from "../../../views/shared";
+import React, { FC, useState } from "react";
+import Modal from "react-modal";
+import { Icon } from "@iconify/react";
+import { getAllMDIIcons } from "./iconUtils";
 import { Link } from "./types";
 
 type Props = Link & {
-  number: number;
   onChange: (values: Partial<Link>) => void;
-  setIconSize: (iconSize: number) => void;
-  onMoveUp?: () => void;
-  onMoveDown?: () => void;
-  onRemove: () => void;
 };
 
-const iconList = Object.keys(icons);
+const iconListArray = getAllMDIIcons();
 
 const Input: FC<Props> = (props) => {
-  const isGoogleOrFavicone = props.icon === "_favicon_google" || props.icon === "_favicon_favicone";
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const filteredIcons = iconListArray.filter((icon) =>
+    icon.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="LinkInput">
-      <h5>
-        <div className="title--buttons">
-          <IconButton onClick={props.onRemove} title="Remove link">
-            <RemoveIcon />
-          </IconButton>
-          {props.onMoveDown && (
-            <IconButton onClick={props.onMoveDown} title="Move link down">
-              <DownIcon />
-            </IconButton>
-          )}
-          {props.onMoveUp && (
-            <IconButton onClick={props.onMoveUp} title="Move link up">
-              <UpIcon />
-            </IconButton>
-          )}
-        </div>
+    <div className="p-4 border rounded-md shadow-md bg-white dark:bg-gray-900">
+      <h5 className="font-semibold mb-3">Shortcut {props.number}</h5>
 
-        {props.number <= 9 ? `Keyboard shortcut ${props.number}` : "Shortcut"}
-      </h5>
-
-      <label>
+      {/* URL INPUT */}
+      <label className="block mb-2">
         URL
         <input
           type="url"
           value={props.url}
-          onChange={(event) => props.onChange({ url: event.target.value })}
+          onChange={(e) => props.onChange({ url: e.target.value })}
+          className="w-full px-3 py-2 border rounded-md"
         />
       </label>
 
-      <label>
-        Name <span className="text--grey">(optional)</span>
+      {/* NAME INPUT */}
+      <label className="block mb-2">
+        Name <span className="text-gray-500">(optional)</span>
         <input
           type="text"
           value={props.name}
-          onChange={(event) => props.onChange({ name: event.target.value })}
+          onChange={(e) => props.onChange({ name: e.target.value })}
+          className="w-full px-3 py-2 border rounded-md"
         />
       </label>
 
-      <label>
-        Icon <span className="text--grey">(optional)</span>
-        <select
-          value={props.icon}
-          onChange={(event) => props.onChange({ icon: event.target.value })}
-        >
-          <option value={""}>None</option>
-          <optgroup label="Website Icons">
-            <option value="_favicon_google">From Google</option>
-            <option value="_favicon_duckduckgo">From DuckDuckGo</option>
-            <option value="_favicon_favicone">From Favicone</option>
-          </optgroup>
-          <optgroup label="Feather Icons">
-            {iconList.map((key) => (
-              <option key={key}>{key}</option>
-            ))}
-          </optgroup>
-        </select>
+      {/* ICON SELECTOR */}
+      <label className="block">
+        Icon <span className="text-gray-500">(optional)</span>
       </label>
+      <button
+        onClick={() => setOpen(true)}
+        className="w-full px-4 py-2 border rounded-md flex items-center justify-between"
+      >
+        {props.icon ? (
+          <>
+            <Icon icon={`mdi:${props.icon}`} className="mr-2 h-5 w-5" />
+            {props.icon}
+          </>
+        ) : (
+          "Select an Icon"
+        )}
+      </button>
 
-      {isGoogleOrFavicone && (
-        <label>
-          Icon Size
-          <select
-            // value={props.iconSize}
-            onChange={(event) => props.setIconSize(Number(event.target.value))}
-          >
-            <option value="16">16x16</option>
-            <option value="32">32x32</option>
-            <option value="64">64x64</option>
-            <option value="128">128x128</option>
-            <option value="256">256x256</option>
-          </select>
-        </label>
-      )}
+      {/* REACT MODAL */}
+      <Modal
+        isOpen={open}
+        onRequestClose={() => setOpen(false)}
+        contentLabel="Select an Icon"
+        className="bg-white dark:bg-gray-900 w-full max-w-4xl p-6 flex flex-col"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        shouldCloseOnOverlayClick
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-semibold">Select an Icon</h2>
+          <button onClick={() => setOpen(false)} className="text-gray-600 dark:text-gray-300">
+            ✕
+          </button>
+        </div>
 
-      <hr />
+        {/* SEARCH BAR */}
+        <input
+          type="text"
+          placeholder="Search icons..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full px-3 py-2 border rounded-md mb-4"
+        />
+
+        {/* ICON GRID */}
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4 p-2">
+          {filteredIcons.map((icon) => (
+            <button
+              key={icon}
+              onClick={() => {
+                props.onChange({ icon });
+                setOpen(false);
+              }}
+              className="flex flex-col items-center p-2 border rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <Icon icon={`mdi:${icon}`} className="h-10 w-10" />
+              <span className="text-xs mt-1">{icon}</span>
+            </button>
+          ))}
+        </div>
+      </Modal>
     </div>
   );
 };
 
 export default Input;
-
-
