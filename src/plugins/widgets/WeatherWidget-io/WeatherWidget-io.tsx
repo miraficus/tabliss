@@ -1,15 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { defaultData, Props } from "./types";
-import "./Weather.sass";
 
 const data_mode = "Current";
 const language = "en";
 const data_days = "3";
 const isFarenheit = true;
-
-
-const widgets_url = `https://forecast7.com/${language}/32d72n117d16/san-diego/${isFarenheit ? "?unit=us" : ""}`;
+let location = "32d72n117d16/san-diego"
 
 const Weather: React.FC<Props> = ({
   cache,
@@ -29,6 +26,12 @@ const Weather: React.FC<Props> = ({
       document.body.removeChild(script);
     };
   }, [data.theme, data.label_1, data.label_2]);
+
+  if (data.customUrl) {
+    location = data.customUrl.match(/forecast7\.com\/en\/([^"]+)/)?.[1] || location;
+  }
+    console.log("location:", location);
+  const widgets_url = `https://forecast7.com/${language}/${location}${isFarenheit ? "?unit=us" : ""}`;
 
   return (
     <div className="WeatherWidget-io">

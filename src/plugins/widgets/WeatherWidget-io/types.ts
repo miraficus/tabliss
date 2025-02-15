@@ -1,12 +1,7 @@
 import { API } from "../../types";
-import { Conditions } from "./conditions";
 
-export type Coordinates = {
-  latitude?: number;
-  longitude?: number;
-};
-
-export type Data = Coordinates & {
+export type Data = {
+  customUrl?: string;
   name?: string;
   showDetails: boolean;
   showCity: boolean;
@@ -19,13 +14,14 @@ export type Data = Coordinates & {
 export type Cache =
   | {
       timestamp: number;
-      conditions: Conditions[];
+      // conditions: Conditions[];
     }
   | undefined;
 
 export type Props = API<Data, Cache>;
 
 export const defaultData: Data = {
+  customUrl: "",
   showDetails: false,
   showCity: true,
   units: "si",
