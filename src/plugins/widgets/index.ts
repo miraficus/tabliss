@@ -19,6 +19,7 @@ import search from "./search";
 import time from "./time";
 import todo from "./todo";
 import weather from "./weather";
+import WeatherWidget from './WeatherWidget-io';
 import workHours from "./workHours";
 import joke from "./joke";
 import CustomText from "./customText";
@@ -46,6 +47,7 @@ export const widgetConfigs = [
   time,
   todo,
   weather,
+  WeatherWidget,
   workHours,
   joke,
   CustomText

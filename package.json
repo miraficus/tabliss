@@ -16,6 +16,7 @@
     "translations": "node ./scripts/translations.js"
   },
   "dependencies": {
+    "@daniel-szulc/react-weather-widget": "^1.1.1",
     "@iconify/react": "^5.2.0",
     "core-js": "^3.40.0",
     "date-fns": "^4.1.0",
