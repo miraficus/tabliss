@@ -12,11 +12,26 @@ type Props = {
 
 const Slot: React.FC<Props> = ({ position, widgets }) => (
   <div className={`Slot ${position}`}>
-    {widgets.map(({ display, id, key }) => (
-      <Widget key={id} {...display}>
-        <Plugin id={id} component={getConfig(key).dashboardComponent} />
-      </Widget>
-    ))}
+    {widgets.map(({ display, id, key }) => {
+      try {
+        const config = getConfig(key);
+        return (
+          <Widget key={id} {...display}>
+            <Plugin id={id} component={config.dashboardComponent} />
+          </Widget>
+        );
+      } catch (error) {
+        console.error(`Error loading widget ${key}:`, error);
+        return (
+          <Widget key={id} {...display}>
+            <div className="widget-error">
+              <p>Widget unavailable: {key}</p>
+              <small>{error instanceof Error ? error.message : 'Unknown error'}</small>
+            </div>
+          </Widget>
+        );
+      }
+    })}
   </div>
 );
 
