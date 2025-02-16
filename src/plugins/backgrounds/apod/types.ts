@@ -6,6 +6,7 @@ export interface Data {
   date: ApodDate;
   customDate?: string;
   showTitle: boolean;
+  videoTime: number; // Time in seconds to show in video
 }
 
 export interface Image {
@@ -27,4 +28,5 @@ export type Props = API<Data, Cache>;
 export const defaultData: Data = {
   date: "today",
   showTitle: true,
+  videoTime: 0,
 };

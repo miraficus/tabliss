@@ -37,6 +37,19 @@ const UnsplashSettings: React.FC<Props> = ({ data = defaultData, setData }) => (
     )}
 
     <label>
+      Video start time (seconds)
+      <input
+        type="number"
+        min="0"
+        step="1"
+        value={data.videoTime}
+        onChange={(event) =>
+          setData({ ...data, videoTime: parseInt(event.target.value) || 0 })
+        }
+      />
+    </label>
+
+    <label>
       <input
         type="checkbox"
         checked={data.showTitle}

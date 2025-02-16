@@ -4,6 +4,21 @@
         background-size: cover
         transition: opacity 0.25s ease-out
     
+    .video-container
+        position: relative
+        width: 100%
+        height: 100%
+        overflow: hidden
+
+        .video
+            position: absolute
+            top: 0
+            left: 0
+            width: 100%
+            height: 100%
+            border: none
+            object-fit: cover
+
     .title
         display: flex
         flex-direction: column
@@ -14,3 +29,11 @@
 
         p
             margin: 4px 0 0
+
+        color: white
+        text-shadow: 0 1px 3px rgba(black, 0.3)
+        text-align: center
+
+        .copyright
+            font-size: 0.8em
+            opacity: 0.8
