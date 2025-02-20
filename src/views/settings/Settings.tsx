@@ -1,7 +1,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { UiContext } from "../../contexts/ui";
-import { exportStore, importStore, resetStore } from "../../db/action";
+import { exportStore, importStore, resetStore, createId } from "../../db/action";
 import { useKeyPress } from "../../hooks";
 import { Icon } from "@iconify/react";
 import Logo from "../shared/Logo";
@@ -56,7 +56,7 @@ const Settings: React.FC = () => {
             } catch (error) {
               alert(
                 `Invalid import file: ${
-                  error instanceof Error ? error.message : "Uknown error"
+                  error instanceof Error ? error.message : "Unknown error"
                 }`,
               );
             }
@@ -67,6 +67,27 @@ const Settings: React.FC = () => {
       document.body.removeChild(input);
     });
     input.click();
+  };
+
+  const handleShowUrl = () => {
+    const json = exportStore();
+    const encodedJson = encodeURIComponent(json);
+    const url = `${window.location.origin}${window.location.pathname}?config=${encodedJson}`;
+    
+    // Check URL length and warn if it's too long
+    if (url.length > 4000) {
+      alert('Warning: This configuration creates a very long URL that may not work in some browsers or servers. Consider using the "export" option instead to share your configuration.');
+    }
+
+    // Create temporary input to copy URL
+    const input = document.createElement('input');
+    document.body.appendChild(input);
+    input.value = url;
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    
+    alert('Shareable URL has been copied to your clipboard!');
   };
 
   useKeyPress(toggleSettings, ["Escape"]);
@@ -86,7 +107,8 @@ const Settings: React.FC = () => {
 
         <p style={{ marginBottom: "2rem" }}>
           <a onClick={handleImport}>Import</a>,{" "}
-          <a onClick={handleExport}>export</a> or{" "}
+          <a onClick={handleExport}>export</a>,{" "}
+          <a onClick={handleShowUrl}>copy URL</a> or{" "}
           <a onClick={handleReset}>reset</a> your settings
         </p>
 

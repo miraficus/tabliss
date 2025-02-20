@@ -10,6 +10,7 @@ import { Settings } from "./settings";
 import Errors from "./shared/Errors";
 import StoreError from "./shared/StoreError";
 import { db } from "../db/state";
+import { importFromUrl } from "../db/action";
 
 function setHighlighting(){
   const checked = db.cache.get('highlightingEnabled');
@@ -93,6 +94,7 @@ const Root: React.FC = () => {
     subscriptions.then(() => {
       setReady(true);
       migrate();
+      importFromUrl(); 
       setTimeout(() => {
         setHighlighting();
       }, 1);

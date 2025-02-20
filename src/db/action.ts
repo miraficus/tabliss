@@ -80,6 +80,11 @@ export const importStore = (dump: any): void => {
   if (typeof dump !== "object" || dump === null)
     throw new TypeError("Unexpected format");
 
+  const shouldOverride = window.confirm(
+    "Are you sure you want to import new settings? This action is non-reversible."
+  );
+  if (!shouldOverride) return;
+
   resetStore();
   if ("backgrounds" in dump) {
     // Version 2 config
@@ -118,3 +123,39 @@ const clear = (db: DB.Database): void => {
   // @ts-ignore
   for (const [key] of DB.prefix(db, "")) DB.del(db, key);
 };
+
+/** Import settings from URL parameters and persist them */
+export function importFromUrl(): void {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const jsonParam = urlParams.get('config');
+    
+    if (jsonParam) {
+      const state = JSON.parse(decodeURIComponent(jsonParam));
+      
+      // Ask the user if they really want to import new settings
+      const shouldOverride = window.confirm(
+        "Are you sure you want to import new settings from the URL? This action is non-reversible."
+      );
+      if (!shouldOverride) return;
+      
+      // Import the settings
+      importStore(state);
+      
+      // Force a sync to storage
+      DB.atomic(db, (trx) => {
+        Object.entries(state).forEach(([key, val]) => {
+          // @ts-ignore
+          DB.put(trx, key, val);
+        });
+      });
+      
+      // Clean up URL after successful import
+      const newUrl = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, '', newUrl);
+    }
+  } catch (error) {
+    console.warn('Failed to import settings from URL:', error);
+    // Silently fail and use default/local settings
+  }
+}
