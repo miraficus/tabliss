@@ -27,7 +27,7 @@ export const SortableWidget: React.FC<Props> = ({ widget, index, total, onRemove
   } = useSortable({ id });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
     position: 'relative' as const,
     zIndex: isDragging ? 1 : 0,
