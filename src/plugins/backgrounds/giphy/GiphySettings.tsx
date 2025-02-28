@@ -20,7 +20,7 @@ const GiphySettings: FC<Props> = ({ data = defaultData, setData }) => (
       <input
         type="checkbox"
         checked={data.expand}
-        onChange={(event) => setData({ ...data, expand: !data.expand })}
+        onChange={() => setData({ ...data, expand: !data.expand })}
       />{" "}
       Stretch to fill screen
     </label>
@@ -29,7 +29,7 @@ const GiphySettings: FC<Props> = ({ data = defaultData, setData }) => (
       <input
         type="checkbox"
         checked={!data.nsfw}
-        onChange={(event) => setData({ ...data, nsfw: !data.nsfw })}
+        onChange={() => setData({ ...data, nsfw: !data.nsfw })}
       />{" "}
       Safe Search
     </label>

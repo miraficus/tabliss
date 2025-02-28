@@ -50,20 +50,20 @@ const Search: FC<Props> = ({ data = defaultData }) => {
     event.preventDefault();
 
     switch (event.key) {
-      case "ArrowUp":
-        const upTo = !active ? suggestions.length - 1 : active - 1;
-        searchInput.current!.value = suggestions[upTo];
-        setActive(upTo);
-        break;
+      case "ArrowUp": {
+          const upTo = !active ? suggestions.length - 1 : active - 1;
+          searchInput.current!.value = suggestions[upTo];
+          setActive(upTo);
+        } break;
 
-      case "ArrowDown":
+      case "ArrowDown": {
         const downTo =
           active === undefined || active === suggestions.length - 1
             ? 0
             : active + 1;
         searchInput.current!.value = suggestions[downTo];
         setActive(downTo);
-        break;
+      } break;
 
       case "Escape":
         if (active) {

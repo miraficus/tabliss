@@ -5,6 +5,8 @@ import { useIsNight } from "../../hooks";
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   ready?: boolean;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
 };
 
 const Backdrop: React.FC<Props> = ({

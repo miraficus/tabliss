@@ -1,7 +1,5 @@
 import React from "react";
-
 import Backdrop from "../../../views/shared/Backdrop";
-
 import { defaultData, Props } from "./types";
 import { fetchFeaturedContent, formatDateForApi } from "./api";
 import WikimediaTitle from "./WikimediaTitle";
@@ -18,7 +16,6 @@ const Wikimedia: React.FC<Props> = ({ cache, data = defaultData, setCache }) => 
     const language = "en";
     const params = { language, formattedDate};
     fetchFeaturedContent(params).then((result) => {
-      console.log(result);
       setCache(result);
       if (mounted.current || !picture) setPicture(result);
     });

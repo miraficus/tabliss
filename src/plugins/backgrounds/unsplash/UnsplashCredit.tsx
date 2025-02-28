@@ -15,17 +15,6 @@ interface Props {
   onNext: (() => void) | null;
 }
 
-const clickLocation = (location: string | undefined, locationSource: string | undefined) => {
-  if (!location) return;
-  if (!locationSource) return;
-  const urls = {
-    "google-maps": `https://www.google.com/maps/search/?api=1&query=${location}`,
-    "google": `https://www.google.com/search?tbm=isch&q=${location}`,
-    "duckduckgo": `https://duckduckgo.com/?q=${location}&iax=images&ia=images`,
-  };
-  window.open(urls[locationSource as keyof typeof urls], "_blank");
-};
-
 const getLocationUrl = (location: string | undefined, locationSource: string | undefined) => {
   if (!location || !locationSource) return "#";
   const urls = {

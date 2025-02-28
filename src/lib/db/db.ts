@@ -30,10 +30,10 @@ export const init = <T = Shape>(def?: T): Database<T> => {
  * WARNING: These types can lie to you. Without schema support, invalid data may be saved in storage.
  */
 export const get = <T, K extends Key<T>>(db: Snapshot<T>, key: K): T[K] => {
-  // @ts-ignore
+  // @ts-expect-error: TypeScript cannot infer the type of the cache correctly
   if (db.cache.has(key)) return db.cache.get(key);
   if (db.parent) return get(db.parent, key);
-  // @ts-ignore
+  // @ts-expect-error: TypeScript cannot infer the type of the cache correctly
   return undefined;
   // TODO: consider throwing, may require tombstones to work correctly
   // throw new NotFoundError(key);
@@ -51,7 +51,7 @@ export const prefix = function* <T, P extends Prefix<keyof T> | "">(
     if (key.startsWith(path)) {
       if (seen.has(key)) continue;
       seen.add(key);
-      // @ts-ignore
+      // @ts-expect-error: TypeScript cannot infer the type of the cache correctly
       yield [key, val];
     }
   }

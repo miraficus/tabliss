@@ -13,7 +13,14 @@ export const fetchFeaturedContent = async ({
 }): Promise<any> => {
   const url = `https://api.wikimedia.org/feed/v1/wikipedia/${language}/featured/${formattedDate}`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    mode: 'cors',
+    headers: {
+      'Accept': 'application/json',
+      'Origin': window.location.origin
+    }
+  });
+  
   const body = await res.json();
 
   if (res.ok) {

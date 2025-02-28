@@ -36,7 +36,7 @@ const WikimediaSettings: React.FC<Props> = ({ data = defaultData, setData }) => 
       <input
         type="checkbox"
         checked={data.showTitle}
-        onChange={(event) => setData({ ...data, showTitle: !data.showTitle })}
+        onChange={() => setData({ ...data, showTitle: !data.showTitle })}
       />{" "}
       Show title
     </label>

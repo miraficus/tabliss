@@ -19,7 +19,7 @@ export function getConfig(key: string) {
       key,
       name: key,
       description:
-        "The plugin id is not valid, if you need help, create an issue on the github repo.",
+        "The plugin id is not valid. If you need help, create an issue on the github repo.",
       settingsComponent: DefaultComponent,
       supportsBackdrop: false,
       dashboardComponent: DefaultComponent,

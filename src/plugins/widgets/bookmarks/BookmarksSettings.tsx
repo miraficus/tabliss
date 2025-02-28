@@ -58,7 +58,7 @@ const BookmarksSettings: FC<Props> = ({ data = defaultData, setData }) => {
       <input
         type="checkbox"
         checked={data.wrap}
-        onChange={(event) =>
+        onChange={() =>
           setData({ ...data, wrap: !data.wrap })
         }
         min={1}

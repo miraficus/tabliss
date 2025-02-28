@@ -1,5 +1,4 @@
 import React from "react";
-import { Image } from "./types";
 
 interface Props {
   title: string;

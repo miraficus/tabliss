@@ -7,7 +7,7 @@ const displayUrl = (url: string): string => {
   try {
     const parsed = new URL(url);
     return parsed.hostname + (parsed.pathname !== "/" ? parsed.pathname : "");
-  } catch (e) {
+  } catch {
     return url;
   }
 };
@@ -15,7 +15,7 @@ const displayUrl = (url: string): string => {
 const getDomain = (url: string): string | null => {
   try {
     return new URL(url).hostname;
-  } catch (e) {
+  } catch {
     return null;
   }
 };

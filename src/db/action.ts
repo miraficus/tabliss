@@ -96,7 +96,7 @@ export const importStore = (dump: any): void => {
     // Unknown version
     throw new TypeError("Unknown settings version");
   }
-  // @ts-ignore
+  // @ts-expect-error: Type of dump is not strictly validated
   Object.entries(dump).forEach(([key, val]) => DB.put(db, key, val));
 };
 
@@ -115,6 +115,6 @@ export const resetStore = (): void => {
 };
 
 const clear = (db: DB.Database): void => {
-  // @ts-ignore
+  // @ts-expect-error: DB.prefix returns an iterable that is not strictly typed
   for (const [key] of DB.prefix(db, "")) DB.del(db, key);
 };

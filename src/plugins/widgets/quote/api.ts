@@ -10,7 +10,7 @@ async function getDeveloperExcuse() {
     return {
       quote: body.data,
     };
-  } catch (err) {
+  } catch {
     return {
       quote: "Unable to get a new developer excuse.",
     };
@@ -131,7 +131,7 @@ function cleanQuote(quote: string) {
   quote = quote.replace(dash, "—");
 
   // We add a period at the end of the quote if need be.
-  const closingPunctuation = new RegExp(/[.\?!…’]$/);
+  const closingPunctuation = new RegExp(/[.?!…’]$/);
   if (!quote.match(closingPunctuation)) quote = quote + ".";
 
   return quote;

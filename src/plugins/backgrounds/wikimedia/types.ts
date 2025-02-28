@@ -11,15 +11,15 @@ export interface Data {
 export interface Image {
   image: {
     description: {
-      html: any;
-      text: any;
+      html: string;
+      text: string;
     };
     artist: {
-      html: any;
-      text: any;
+      html: string;
+      text: string;
     };
     image: {
-      source: any;
+      source: string;
     };
   };
 }

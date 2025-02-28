@@ -6,9 +6,9 @@ export function useObjectUrl(data?: Blob) {
 
   useEffect(() => {
     const prev = url;
-    () => {
+    (() => {
       if (prev) URL.revokeObjectURL(prev);
-    };
+    })();
   }, [url]);
 
   return url;
@@ -28,3 +28,4 @@ export function useObjectUrls(data: Blob[]) {
 
   return urls;
 }
+

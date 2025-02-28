@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-
+import React from "react";
 import categories from "./categories";
 import { Props, defaultData } from "./types";
 

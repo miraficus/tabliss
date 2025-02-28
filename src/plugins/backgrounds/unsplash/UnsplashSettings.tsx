@@ -98,7 +98,7 @@ const UnsplashSettings: React.FC<Props> = ({ data = defaultData, setData }) => (
           <input
             type="checkbox"
             checked={data.featured}
-            onChange={(event) => setData({ ...data, featured: !data.featured })}
+            onChange={() => setData({ ...data, featured: !data.featured })}
           />{" "}
           Only featured images
         </label>

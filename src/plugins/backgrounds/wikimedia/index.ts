@@ -1,8 +1,6 @@
 import { Config } from "../../types";
 import Wikimedia from "./Wikimedia";
-import Apod from "./Wikimedia";
 import WikimediaSettings from "./WikimediaSettings";
-import ApodSettings from "./WikimediaSettings";
 
 const config: Config = {
   key: "background/wikimedia",

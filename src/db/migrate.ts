@@ -28,7 +28,9 @@ const migrateWeb = async (): Promise<void> => {
         importStore(JSON.parse(data));
         migrateCache();
         clearDangling();
-      } catch {}
+      } catch (error) {
+        console.error('Failed to migrate web data:', error);
+      }
     }
     localStorage.removeItem(key);
   }
@@ -82,3 +84,4 @@ const clearDangling = (): void => {
     if (!used.has(key)) DB.del(cache, key);
   }
 };
+
