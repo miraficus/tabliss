@@ -21,9 +21,10 @@ import todo from "./todo";
 import weather from "./weather";
 import workHours from "./workHours";
 import joke from "./joke";
-import CustomText from "./customText";
+import customText from "./customText";
 import bookmarks from "./bookmarks";
 import binarytime from "./binaryTime";
+import spotify from "./spotify";
 
 export const widgetConfigs = [
   countdown,
@@ -49,7 +50,8 @@ export const widgetConfigs = [
   weather,
   workHours,
   joke,
-  CustomText,
+  customText,
+  spotify,
 ];
 
 if (BUILD_TARGET === "web") {
