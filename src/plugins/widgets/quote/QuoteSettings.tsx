@@ -35,6 +35,7 @@ const QuoteSettings: React.FC<Props> = ({ data = defaultData, setData }) => (
       </a>
     </p> */}
     <p>Daily Quotes from 'They Said So' are no longer available, I apologize for the inconvenience this may have caused.</p>
+
     <label>
       <input
         type="radio"
@@ -53,6 +54,7 @@ const QuoteSettings: React.FC<Props> = ({ data = defaultData, setData }) => (
         DWYL Quotes
       </a>
     </p>
+
     <label>
       <input
         type="radio"
@@ -71,6 +73,27 @@ const QuoteSettings: React.FC<Props> = ({ data = defaultData, setData }) => (
         Quotable
       </a>
     </p>
+
+    <label>
+      <input
+        type="radio"
+        checked={data.category === "randomBible"}
+        onChange={() => setData({ category: "randomBible" })}
+      />{" "}
+      <FormattedMessage
+        id="plugins.quotes.randomBibleVerse"
+        defaultMessage="Random Bible Verse"
+        description="Bible verse option"
+      />
+    </label>
+    <p>
+      <FormattedMessage
+        id="plugins.quotes.randomBibleVerseDescription"
+        defaultMessage="Top inspirational verses from the Bible."
+        description="Bible verse description"
+      />
+    </p>
+
     <h5><FormattedMessage
           id="plugins.quotes.hourlyQuotes"
           defaultMessage="Hourly Quotes"
