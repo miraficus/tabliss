@@ -1,5 +1,5 @@
 {
-   "add.new.widget": "Přidat nový widget",
+  "add.new.widget": "Přidat nový widget",
   "app.pageTitle": "Nový panel",
   "background": "Pozadí",
   "backgrounds.apod.description": "Obrázky oblohy od NASA",
@@ -72,7 +72,6 @@
   "dashboard.fullscreenHint": "Přepnout zobrazení na celou obrazovku",
   "dashboard.loadingHint": "Načítání nového obsahu",
   "dashboard.settingsHint": "Přizpůsobit Tabliss",
-  
   "language": "Jazyk",
   "plugins.apply": "Použít",
   "plugins.binaryTime.activeColor": "Aktivní barva",
