@@ -107,5 +107,10 @@ export const engines: Engine[] = [
     name: "Wikipedia",
     search_url: "https://wikipedia.org/w/index.php?search={searchTerms}",
     suggest_url: "https://en.wikipedia.org/w/rest.php/v1/search/title?q={searchTerms}&limit=10"
+  },
+    {
+    key: "seznam",
+    name: "Seznam",
+    search_url: "https://search.seznam.cz/?q={searchTerms}",
   }
 ];
