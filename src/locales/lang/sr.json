@@ -385,6 +385,7 @@
   "settings.github.star": "Star",
   "settings.github.watch": "Watch",
   "settings.hideIcon": "Hide Settings Icon",
+  "settings.hideMenu": "Auto-hide Settings Menu",
   "settings.highlighting": "Allow Highlighting",
   "settings.iconPosition": "Settings Icon Position",
   "settings.import": "Import",

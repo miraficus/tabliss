@@ -375,7 +375,13 @@ const System: React.FC = () => {
           width: "100%",
         }}
       >
-        <span>Auto-hide Settings Menu</span>
+        <span>
+        <FormattedMessage
+            id="settings.hideMenu"
+            defaultMessage="Auto-hide Settings Menu"
+            description="Automaticaly hide settings label"
+          />
+        </span>
         <input
           type="checkbox"
           checked={autoHideSettings}
