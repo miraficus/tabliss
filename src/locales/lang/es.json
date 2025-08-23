@@ -385,6 +385,7 @@
   "settings.github.star": "Estrella",
   "settings.github.watch": "Mirar",
   "settings.hideIcon": "Esconder icono de configuración",
+  "settings.hideMenu": "Auto-hide Settings Menu",
   "settings.highlighting": "Permitir Destacado",
   "settings.iconPosition": "Configuración de la posición del icono",
   "settings.import": "Importar",
