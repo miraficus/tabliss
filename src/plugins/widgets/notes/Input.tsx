@@ -1,6 +1,5 @@
 import React from "react";
 import { useKeyPress } from "../../../hooks";
-import { Icon } from "@iconify/react";
 
 interface Props
   extends Omit<React.HTMLAttributes<HTMLSpanElement>, "onChange"> {

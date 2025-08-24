@@ -24,6 +24,8 @@ const Widget: React.FC<WidgetProps> = ({
   position,
   x = window.innerWidth / 2,
   y = window.innerHeight / 2,
+  xPercent = 50,
+  yPercent = 50,
   isEditingPosition = false,
   customClass
 }) => {
@@ -32,12 +34,56 @@ const Widget: React.FC<WidgetProps> = ({
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 });
   const [offset, setOffset] = React.useState({ x, y });
   const [width, setWidth] = React.useState<number | null>(null);
+  const [height, setHeight] = React.useState<number | null>(null);
+
+  // Calculate pixel position from percentage, accounting for widget dimensions
+  const getPixelPosition = React.useCallback(() => {
+    if (xPercent !== undefined && yPercent !== undefined) {
+      // Calculate available space accounting for widget dimensions
+      const availableWidth = window.innerWidth - (width || 0);
+      const availableHeight = window.innerHeight - (height || 0);
+
+      // Use percentage of available space to prevent edge misalignment
+      const pixelX = Math.max(0, Math.min((xPercent / 100) * availableWidth, availableWidth));
+      const pixelY = Math.max(0, Math.min((yPercent / 100) * availableHeight, availableHeight));
+
+      return { x: pixelX, y: pixelY };
+    }
+
+    // Fall back to pixel coordinates
+    return { x: x || 0, y: y || 0 };
+  }, [x, y, xPercent, yPercent, width, height]);
+
+  // Migration: Convert existing pixel coordinates to percentages if needed
+  React.useEffect(() => {
+    if (position === "free" && xPercent === undefined && yPercent === undefined && x !== undefined && y !== undefined && width !== null && height !== null) {
+      // This is an existing widget without percentage coordinates, migrate it
+      const availableWidth = window.innerWidth - width;
+      const availableHeight = window.innerHeight - height;
+      const newXPercent = availableWidth > 0 ? (x / availableWidth) * 100 : 0;
+      const newYPercent = availableHeight > 0 ? (y / availableHeight) * 100 : 0;
+
+      setWidgetDisplay(id, {
+        xPercent: newXPercent,
+        yPercent: newYPercent
+      });
+    }
+  }, [position, x, y, xPercent, yPercent, id, width, height]);
+
+  // Update offset when window size changes or percentage changes
+  React.useEffect(() => {
+    if (position === "free") {
+      const pixelPos = getPixelPosition();
+      setOffset(pixelPos);
+    }
+  }, [position, getPixelPosition]);
 
   React.useEffect(() => {
-    if (position === "free" && widgetRef.current && !width) {
+    if (position === "free" && widgetRef.current && (!width || !height)) {
       setWidth(widgetRef.current.offsetWidth);
+      setHeight(widgetRef.current.offsetHeight);
     }
-  }, [position]);
+  }, [position, width, height]);
 
   const handleDragStart = (e: React.MouseEvent) => {
     if (!widgetRef.current || !isEditingPosition || position !== "free") return;
@@ -55,9 +101,26 @@ const Widget: React.FC<WidgetProps> = ({
     if (!isDragging) return;
     const newX = e.clientX - dragStart.x;
     const newY = e.clientY - dragStart.y;
-    setOffset({ x: newX, y: newY });
-    setWidgetDisplay(id, { position: "free", x: newX, y: newY });
-  }, [isDragging, dragStart, id]);
+
+    // Constrain to viewport bounds
+    const constrainedX = Math.max(0, Math.min(newX, window.innerWidth - (width || 0)));
+    const constrainedY = Math.max(0, Math.min(newY, window.innerHeight - (height || 0)));
+
+    // Convert pixel coordinates to percentages based on available space
+    const availableWidth = window.innerWidth - (width || 0);
+    const availableHeight = window.innerHeight - (height || 0);
+    const newXPercent = availableWidth > 0 ? (constrainedX / availableWidth) * 100 : 0;
+    const newYPercent = availableHeight > 0 ? (constrainedY / availableHeight) * 100 : 0;
+
+    setOffset({ x: constrainedX, y: constrainedY });
+    setWidgetDisplay(id, {
+      position: "free",
+      x: constrainedX,
+      y: constrainedY,
+      xPercent: newXPercent,
+      yPercent: newYPercent
+    });
+  }, [isDragging, dragStart, id, width, height]);
 
   React.useEffect(() => {
     if (!isDragging) return;
@@ -71,6 +134,19 @@ const Widget: React.FC<WidgetProps> = ({
       document.removeEventListener('mouseup', stopDragging);
     };
   }, [isDragging, handleDrag]);
+
+  // Handle window resize to maintain relative positioning
+  React.useEffect(() => {
+    if (position !== "free") return;
+
+    const handleResize = () => {
+      const pixelPos = getPixelPosition();
+      setOffset(pixelPos);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [position, getPixelPosition]);
 
   const styles: React.CSSProperties = {
     position: position === "free" ? "absolute" : "relative",
@@ -94,10 +170,19 @@ const Widget: React.FC<WidgetProps> = ({
 
   const handleSave = () => {
     setIsDragging(false);
+
+    // Convert current pixel position to percentages based on available space
+    const availableWidth = window.innerWidth - (width || 0);
+    const availableHeight = window.innerHeight - (height || 0);
+    const newXPercent = availableWidth > 0 ? (offset.x / availableWidth) * 100 : 0;
+    const newYPercent = availableHeight > 0 ? (offset.y / availableHeight) * 100 : 0;
+
     setWidgetDisplay(id, {
       position: "free",
       x: offset.x,
       y: offset.y,
+      xPercent: newXPercent,
+      yPercent: newYPercent,
       isEditingPosition: false
     });
   };

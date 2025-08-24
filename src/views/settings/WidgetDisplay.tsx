@@ -45,7 +45,7 @@ const WidgetDisplay: React.FC<Props> = ({ display, onChange }) => {
               />
             </button>
             <button
-              onClick={() => {onChange({ x: window.innerWidth / 2, y: window.innerHeight / 2 }); window.location.reload();}}
+              onClick={() => {onChange({ x: window.innerWidth / 2, y: window.innerHeight / 2, xPercent: 50, yPercent: 50 }); window.location.reload();}}
               className="button button--primary"
             >
               <FormattedMessage

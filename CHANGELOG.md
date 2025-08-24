@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 I also attempt to follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
+## [Unreleased]
+
+## Changed
+
+- feat: attempt at making custom positioning relative.
+
+- feat: prevent resiszing textboxes in settings into unclickable areas. [#48](https://github.com/BookCatKid/TablissNG/pull/48)
+
 ## [1.5.1] - 8/4/2025 | Minor Feature and Bugfix Update
 
 ### Added

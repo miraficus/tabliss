@@ -54,6 +54,9 @@ export interface WidgetState {
 export interface WidgetDisplay {
   x?: number;
   y?: number;
+  // Percentage-based coordinates for relative positioning
+  xPercent?: number;
+  yPercent?: number;
   colour?: string;
   fontFamily?: string;
   fontSize?: number;
