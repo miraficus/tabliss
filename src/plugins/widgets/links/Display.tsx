@@ -90,13 +90,13 @@ const Display: FC<Props> = ({
   const handleClick = (e: React.MouseEvent) => {
     // Prevent default behavior for special URLs
     if (url.startsWith('about:') ||           // Browser internal pages (about:blank, about:config)
-        url.startsWith('chrome:') ||          // Chrome browser internal pages (chrome:settings)
-        url.startsWith('edge:') ||            // Edge browser internal pages (edge:settings)
-        url.startsWith('file:') ||            // Local file system URLs (file:///path)
-        url.startsWith('chrome-extension:') || // Chrome extension pages (chrome-extension://id)
-        url.startsWith('moz-extension:') ||    // Firefox extension pages (moz-extension://id)
-        url.startsWith('ms-settings:') ||      // Windows system settings (ms-settings:display)
-        url.startsWith('view-source:')) {      // View page source (view-source:https://example.com)
+      url.startsWith('chrome:') ||          // Chrome browser internal pages (chrome:settings)
+      url.startsWith('edge:') ||            // Edge browser internal pages (edge:settings)
+      url.startsWith('file:') ||            // Local file system URLs (file:///path)
+      url.startsWith('chrome-extension:') || // Chrome extension pages (chrome-extension://id)
+      url.startsWith('moz-extension:') ||    // Firefox extension pages (moz-extension://id)
+      url.startsWith('ms-settings:') ||      // Windows system settings (ms-settings:display)
+      url.startsWith('view-source:')) {      // View page source (view-source:https://example.com)
       e.preventDefault();
 
       if (BUILD_TARGET === 'firefox') {
