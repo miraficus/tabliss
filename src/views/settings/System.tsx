@@ -190,6 +190,9 @@ const System: React.FC = () => {
           <option value="sk" title="Slovak">
             Slovenčina
           </option>
+          <option value="sq" title="Albanian">
+            Shqip
+          </option>
           <option value="sr" title="Serbian">
             Српски
           </option>

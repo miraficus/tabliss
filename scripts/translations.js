@@ -43,6 +43,7 @@ const languages = [
   "ro",
   "ru",
   "sk",
+  "sq",
   "sr",
   "sv",
   "ta",
