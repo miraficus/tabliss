@@ -68,6 +68,8 @@ export interface WidgetDisplay {
   textOutlineSize?: number;
   textOutlineColor?: string;
   fontWeight?: number;
+  fontStyle?: "normal" | "italic";
+  textDecoration?: "none" | "underline";
   position: WidgetPosition;
   customClass?: string;
 }

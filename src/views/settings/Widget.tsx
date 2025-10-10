@@ -215,6 +215,36 @@ const Widget: React.FC<Props> = ({
               </label>
 
               <label>
+                <input
+                  type="checkbox"
+                  checked={plugin.display.fontStyle === "italic"}
+                  onChange={(event) =>
+                    setDisplay({ fontStyle: event.target.checked ? "italic" : "normal" })
+                  }
+                />{" "}
+                <FormattedMessage
+                  id="settings.font.italic"
+                  defaultMessage="Italic"
+                  description="Italic font style option"
+                />
+              </label>
+
+              <label>
+                <input
+                  type="checkbox"
+                  checked={plugin.display.textDecoration === "underline"}
+                  onChange={(event) =>
+                    setDisplay({ textDecoration: event.target.checked ? "underline" : "none" })
+                  }
+                />{" "}
+                <FormattedMessage
+                  id="settings.font.underline"
+                  defaultMessage="Underline"
+                  description="Underline text decoration option"
+                />
+              </label>
+
+              <label>
               <FormattedMessage
           id="colour"
           defaultMessage="Colour"

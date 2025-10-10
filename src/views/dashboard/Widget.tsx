@@ -21,6 +21,8 @@ const Widget: React.FC<WidgetProps> = ({
   textOutlineSize = 1,
   textOutlineColor = "#000000",
   fontWeight,
+  fontStyle,
+  textDecoration,
   position,
   x = window.innerWidth / 2,
   y = window.innerHeight / 2,
@@ -154,6 +156,8 @@ const Widget: React.FC<WidgetProps> = ({
     fontFamily,
     fontSize: `${fontSize}px`,
     fontWeight,
+    fontStyle,
+    textDecoration,
     transform: `scale(${scale}) rotate(${rotation}deg)`,
     ...(position === "free" && {
       left: `${offset.x}px`,
