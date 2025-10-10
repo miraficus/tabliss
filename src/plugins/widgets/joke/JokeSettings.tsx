@@ -6,30 +6,41 @@ import { Props, defaultData, JokeAPICategory } from "./types";
 import { pluginMessages, timingMessages } from "../../../locales/messages";
 
 function updateSelectedCategories(
-  existingCategories: Set<JokeAPICategory>,
+  existingCategories: JokeAPICategory[],
   updatedCategory: JokeAPICategory,
   checked: boolean,
-): Set<JokeAPICategory> {
+): JokeAPICategory[] {
   const isAnyCategoryChecked = updatedCategory === "any" && checked;
-  const isLastItemBeingUnchecked = !checked && existingCategories.size === 1;
+  const isLastItemBeingUnchecked = !checked && existingCategories.length === 1;
 
   if (isLastItemBeingUnchecked) {
     return existingCategories;
   }
 
   if (isAnyCategoryChecked) {
-    return new Set(["any"]);
+    return ["any"];
   }
 
-  const categories = new Set(existingCategories);
+  const categories = [...existingCategories];
 
-  categories.delete("any");
+  // Remove "any" if it exists
+  const anyIndex = categories.indexOf("any");
+  if (anyIndex !== -1) {
+    categories.splice(anyIndex, 1);
+  }
 
-  checked
-    ? categories.add(updatedCategory)
-    : categories.delete(updatedCategory);
+  if (checked) {
+    if (!categories.includes(updatedCategory)) {
+      categories.push(updatedCategory);
+    }
+  } else {
+    const index = categories.indexOf(updatedCategory);
+    if (index !== -1) {
+      categories.splice(index, 1);
+    }
+  }
 
-  return categories;
+  return categories.length === 0 ? existingCategories : categories;
 }
 
 const JokeSettings: React.FC<Props> = ({ data = defaultData, setData }) => {
@@ -94,7 +105,7 @@ const JokeSettings: React.FC<Props> = ({ data = defaultData, setData }) => {
             <label key={category.key}>
               <input
                 type="checkbox"
-                checked={data.categories.has(category.key)}
+                checked={data.categories.includes(category.key)}
                 onChange={(event) => {
                   const categories = updateSelectedCategories(
                     data.categories,

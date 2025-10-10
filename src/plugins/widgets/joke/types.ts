@@ -66,7 +66,7 @@ export function isJokeError(
 
 export type JokeAPICategory = (typeof categories)[number]["key"];
 export type Data = {
-  categories: Set<JokeAPICategory>;
+  categories: JokeAPICategory[];
   timeout: number;
   keyBind?: string;
 };
@@ -76,7 +76,7 @@ export type Cache = JokeAPIResponse;
 export type Props = API<Data, Cache>;
 
 export const defaultData: Data = {
-  categories: new Set(["any"]),
+  categories: ["any"],
   timeout: 5 * MINUTES,
   keyBind: "J",
 };
