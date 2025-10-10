@@ -8,10 +8,10 @@ import Select from "react-dropdown-select";
 import { timingMessages } from "../../../locales/messages";
 
 const messages = defineMessages({
-  tagsPlaceholder: {
-    id: "backgrounds.unsplash.tags.placeholder",
+  searchTermPlaceholder: {
+    id: "backgrounds.unsplash.searchTerm.placeholder",
     defaultMessage: "Try landscapes or animals...",
-    description: "Placeholder text for tags input"
+    description: "Placeholder text for search term input"
   },
   collectionIdPlaceholder: {
     id: "backgrounds.unsplash.collectionId.placeholder",
@@ -189,14 +189,14 @@ const UnsplashSettings: React.FC<Props> = ({ data = defaultData, setData }) => {
         <>
           <label>
             <FormattedMessage
-            id="backgrounds.unsplash.tags"
-            defaultMessage="Tags"
-            description="Tags title"
+            id="backgrounds.unsplash.searchTerm"
+            defaultMessage="Search Term"
+            description="Search Term title"
           />
             <DebounceInput
               type="text"
               value={data.search}
-              placeholder={intl.formatMessage(messages.tagsPlaceholder)}
+              placeholder={intl.formatMessage(messages.searchTermPlaceholder)}
               onChange={(value) => setData({ ...data, search: value })}
               wait={500}
             />
