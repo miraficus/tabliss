@@ -34,6 +34,19 @@ const LiteratureClockSettings: FC<Props> = ({
           description="Align text at center title"
         />
     </label>
+
+    <label>
+      <input
+        type="checkbox"
+        checked={data.sfw}
+        onChange={() => setData({ ...data, sfw: !data.sfw })}
+      />{" "}
+      <FormattedMessage
+          id="plugins.literatureClock.safeForWork"
+          defaultMessage="Safe for work only"
+          description="Show only safe for work quotes"
+        />
+    </label>
   </div>
 );
 

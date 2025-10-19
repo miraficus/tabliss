@@ -13,8 +13,12 @@ const LiteratureClock: FC<Props> = ({
   const timeCode = getTimeCode(time);
 
   useEffect(() => {
-    getQuoteByTimeCode(timeCode).then(setCache);
-  }, [timeCode]);
+    getQuoteByTimeCode(timeCode, data.sfw)
+      .then(setCache)
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [timeCode, data.sfw]);
 
   if (!cache) {
     return null;
