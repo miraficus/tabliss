@@ -74,6 +74,17 @@ const BookmarksSettings: FC<Props> = ({ data = defaultData, setData }) => {
         </select>
       </label>
 
+      {data.navigationStyle === 'expand-collapse' && (
+        <label>
+          <input
+            type="checkbox"
+            checked={data.rememberExpanded ?? true}
+            onChange={e => setData({ ...data, rememberExpanded: e.target.checked })}
+          />
+          Remember expanded folders
+        </label>
+      )}
+
       <label>
         Maximum width (em)
         <input

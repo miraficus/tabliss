@@ -13,6 +13,8 @@ export type Data = {
     | "_favicon_favicone";
   shortNames: boolean;
   maxTextLength: number;
+  expandedFolders?: string[];
+  rememberExpanded?: boolean;
 };
 
 export type Props = API<Data>;
@@ -26,6 +28,8 @@ export const defaultData: Data = {
   iconProvider: "_default",
   shortNames: false,
   maxTextLength: 0,
+  expandedFolders: [],
+  rememberExpanded: true,
 };
 
 export type BookmarkTreeNode = {

@@ -15,6 +15,9 @@ type NodeProps = {
   shortNames: boolean;
   maxTextLength: number;
   isRoot?: boolean;
+  expandedFolders?: string[];
+  setExpandedFolders?: (ids: string[]) => void;
+  rememberExpanded?: boolean;
 };
 
 const Node: FC<NodeProps> = ({
@@ -26,11 +29,30 @@ const Node: FC<NodeProps> = ({
   iconProvider,
   shortNames,
   maxTextLength,
-  isRoot = false
+  isRoot = false,
+  expandedFolders = [],
+  setExpandedFolders,
+  rememberExpanded = true
 }) => {
   // For auto-expanded mode, folders are expanded by default
-  const [isExpanded, setIsExpanded] = useState(navigationStyle === 'auto-expanded');
   const isFolder = !node.url;
+  // Local state for expansion if not remembering
+  const [localExpanded, setLocalExpanded] = useState(false);
+
+  let isExpanded = false;
+  if (navigationStyle === 'auto-expanded') {
+    isExpanded = true;
+  } else if (!isFolder) {
+    isExpanded = false;
+  } else if (navigationStyle === 'expand-collapse') {
+    if (rememberExpanded && setExpandedFolders) {
+      isExpanded = expandedFolders.includes(node.id);
+    } else {
+      isExpanded = localExpanded;
+    }
+  } else {
+    isExpanded = false;
+  }
   const cls = isFolder ? "folder" : "bookmark";
 
   // Skip rendering if this is the root node in auto-expanded mode
@@ -48,6 +70,9 @@ const Node: FC<NodeProps> = ({
             iconProvider={iconProvider}
             shortNames={shortNames}
             maxTextLength={maxTextLength}
+            expandedFolders={expandedFolders}
+            setExpandedFolders={setExpandedFolders}
+            rememberExpanded={rememberExpanded}
           />
         ))}
       </>
@@ -60,14 +85,27 @@ const Node: FC<NodeProps> = ({
     if (navigationStyle === 'drill-down') {
       onFolderClick?.(node.id);
     } else if (navigationStyle === 'expand-collapse') {
-      setIsExpanded(!isExpanded);
+      if (rememberExpanded && setExpandedFolders) {
+        if (isExpanded) {
+          setExpandedFolders(expandedFolders.filter(id => id !== node.id));
+        } else {
+          setExpandedFolders([...expandedFolders, node.id]);
+        }
+      } else {
+        setLocalExpanded(exp => !exp);
+      }
     }
     // No action for auto-expanded mode
   };
 
-  const displayTitle = shortNames && node.url
-    ? truncateText(cleanTitle(node.title, node.url), maxTextLength)
-    : node.title;
+  let displayTitle: string;
+  if (isFolder) {
+    displayTitle = node.title?.trim() ? node.title : "(Untitled Folder)";
+  } else if (shortNames && node.url) {
+    displayTitle = truncateText(cleanTitle(node.title, node.url), maxTextLength);
+  } else {
+    displayTitle = node.title;
+  }
 
   const domain = node.url ? new URL(node.url).hostname : '';
 
@@ -79,7 +117,7 @@ const Node: FC<NodeProps> = ({
       <div
         className={folderClass}
         style={{
-          marginLeft: depth + "em",
+          marginLeft: isFolder && isExpanded ? (depth - 0.2) + "em" : depth + "em",
           whiteSpace: wrap ? undefined : "pre",
           cursor: navigationStyle === 'auto-expanded' && isFolder ? "default" : "pointer"
         }}
@@ -114,13 +152,16 @@ const Node: FC<NodeProps> = ({
           iconProvider={iconProvider}
           shortNames={shortNames}
           maxTextLength={maxTextLength}
+          expandedFolders={expandedFolders}
+          setExpandedFolders={setExpandedFolders}
+          rememberExpanded={rememberExpanded}
         />
       ))}
     </>
   );
 };
 
-const Bookmarks: FC<Props> = ({ data = defaultData }) => {
+const Bookmarks: FC<Props> = ({ data = defaultData, setData }) => {
   const [tree, setTree] = useState<BookmarkTreeNode>();
   const [hasPermission, setHasPermission] = useState<boolean>(true);
   const [currentFolder, setCurrentFolder] = useState<string | null>(null);
@@ -190,6 +231,7 @@ const Bookmarks: FC<Props> = ({ data = defaultData }) => {
 
   if (!tree) return null;
 
+
   return (
     <div className="Bookmarks" style={{
       maxWidth: data.maxWidth + "em",
@@ -239,6 +281,9 @@ const Bookmarks: FC<Props> = ({ data = defaultData }) => {
           iconProvider={data.iconProvider}
           shortNames={data.shortNames}
           maxTextLength={data.maxTextLength}
+          expandedFolders={data.expandedFolders}
+          setExpandedFolders={setData ? (ids => setData({ ...data, expandedFolders: ids })) : undefined}
+          rememberExpanded={data.rememberExpanded}
         />
       )}
     </div>
