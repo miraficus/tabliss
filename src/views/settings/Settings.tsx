@@ -226,7 +226,8 @@ const Settings: React.FC = () => {
             description="your settings title"
           />
         </p>
-        <Persist />
+        {/* Only relevant for the web build where IndexedDB may be evicted. Hide for extension builds to avoid confusing prompts in Firefox/Chromium. */}
+        {BUILD_TARGET === "web" && <Persist />}
         <div style={{ textAlign: "center" }} className="Widget">
           <h4><FormattedMessage
           id="support"
