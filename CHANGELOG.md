@@ -8,8 +8,6 @@ I also attempt to follow the [Conventional Commits](https://www.conventionalcomm
 
 ## [Unreleased]
 
-## [1.5.2] - 10/25/2025 | Feature and Bugfix Update
-
 ### Added
 
 - feat(Persist): improve errors and remove on non-web builds. [98195e8](https://github.com/BookCatKid/TablissNG/commit/98195e8)
@@ -35,6 +33,8 @@ I also attempt to follow the [Conventional Commits](https://www.conventionalcomm
 - chore: Change timezone label "Europe/Kiev" to "Europe/Kyiv". [46c9b61](https://github.com/BookCatKid/TablissNG/commit/46c9b61)
 
 ### Fixed
+
+- fix(Import): set display.scale to true by default. [116df62](https://github.com/BookCatKid/TablissNG/commit/116df62a21c3eb83d8756c2d657ce01fa0a680b3)
 
 - fix(Jokes): set not saving contents correctly [32031e5](https://github.com/BookCatKid/TablissNG/commit/32031e5)
 
