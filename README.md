@@ -1,6 +1,6 @@
 # TablissNG
 
-<img src="screenshots/screenshot_1.png" width="49%"/> <img src="screenshots/screenshot_2.png" width="50%"/>  
+<img src="screenshots/screenshot_1.png" width="49%"/> <img src="screenshots/screenshot_2.png" width="50%"/>
 <img src="screenshots/screenshot_3.png" width="49%"/> <img src="screenshots/screenshot_4.png" width="50%"/>
 <img src="screenshots/screenshot_5.png" width="24%"/>
 <img src="screenshots/screenshot_6.png" width="24%"/>
@@ -38,11 +38,9 @@ For local development, you'll need Node.js and NPM installed. Latest versions sh
 First, clone the repo:
 
 ```sh
-https://github.com/BookCatKid/TablissNG.git
+git clone https://github.com/BookCatKid/TablissNG.git
 cd TablissNG
 ```
-
-If you want a simple build script after cloning the repo, see [BUILDING.md](BUILDING.md).
 
 Then install the dependencies:
 
@@ -58,6 +56,7 @@ npm install
 - `npm run translations` — Manage translation files (see TRANSLATING.md)
 - `npm run lint:fix` — Run ESLint with --fix (or just `npm run lint` for checking)
 - `npm run prettier` — Run Prettier with --write (or npm run `prettier:check` for checking)
+- `npm run deps:update` — Run interactive dependency update tool (or `npm run deps:check` to just check for updates and unused dependencies)
 
 By default, build and dev will target the web version. To specify a platform (Chromium or Firefox), append `:chromium` or `:firefox` to the command. For example:
 
@@ -65,6 +64,8 @@ By default, build and dev will target the web version. To specify a platform (Ch
 npm run dev:chromium
 npm run build:firefox
 ```
+
+### Environment variables
 
 To develop with external services, you'll need to sign up for API keys and enter them into your `.env` file. Start by copying the example:
 
