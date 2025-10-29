@@ -11,13 +11,13 @@
 
 <div align="center">
     <a href="https://chromewebstore.google.com/detail/tablissng/dlaogejjiafeobgofajdlkkhjlignalk">
-        <img src="https://img.shields.io/chrome-web-store/users/dlaogejjiafeobgofajdlkkhjlignalk?logo=googlechrome&logoColor=ffffff"></a>
+        <img src="https://img.shields.io/chrome-web-store/users/dlaogejjiafeobgofajdlkkhjlignalk?logo=googlechrome&logoColor=ffffff&color=0779ba"></a>
     <a href="https://addons.mozilla.org/en-US/firefox/addon/tablissng/">
         <img src="https://img.shields.io/amo/users/tablissng?logo=firefoxbrowser&logoColor=ffffff"></a>
     <a href="https://github.com/BookCatKid/TablissNG/stargazers">
         <img src="https://img.shields.io/github/stars/BookCatKid/TablissNG?style=flat"></a>
     <a href="https://github.com/BookCatKid/TablissNG/commits/main/">
-        <img src="https://img.shields.io/github/last-commit/BookCatKid/TablissNG"></a>
+        <img src="https://img.shields.io/github/last-commit/BookCatKid/TablissNG?color=0779ba"></a>
     <a href="https://github.com/BookCatKid/TablissNG/releases/latest">
         <img src="https://img.shields.io/github/v/release/BookCatKid/TablissNG.svg?logo=github"></a>
     <a href="https://www.gnu.org/licenses/gpl-3.0">
