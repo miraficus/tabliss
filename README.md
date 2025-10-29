@@ -12,6 +12,8 @@
 <div align="center">
     <a href="https://chromewebstore.google.com/detail/tablissng/dlaogejjiafeobgofajdlkkhjlignalk">
         <img src="https://img.shields.io/chrome-web-store/users/dlaogejjiafeobgofajdlkkhjlignalk?logo=googlechrome&logoColor=ffffff"></a>
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/tablissng/">
+        <img src="https://img.shields.io/amo/users/tablissng?logo=firefoxbrowser&logoColor=ffffff"></a>
     <a href="https://github.com/BookCatKid/TablissNG/stargazers">
         <img src="https://img.shields.io/github/stars/BookCatKid/TablissNG?style=flat"></a>
     <a href="https://github.com/BookCatKid/TablissNG/commits/main/">
