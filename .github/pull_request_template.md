@@ -12,7 +12,7 @@
 
 ## Changelog Entry
 
-<!-- Add a changelog entry in the format used in CHANGELOG.md. This helps with creating releases. Then, paste your entry here. -->
+<!-- Add a changelog entry in the format used in CHANGELOG.md. This helps with creating releases. Please add the entry to CHANGELOG.md. -->
 
 ## Screenshots
 <!-- If your changes include visual changes, add screenshots here, otherwise delete this section -->
